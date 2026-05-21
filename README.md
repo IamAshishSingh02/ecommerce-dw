@@ -14,6 +14,7 @@ This project demonstrates an end-to-end SQL data warehousing workflow:
 - Analytical queries using CTEs and window functions
 
 ## ETL Flow Diagram
+
 ![ETL Flow Diagram](diagrams/etl-flow.png)
 
 ## Tech Stack
@@ -22,6 +23,7 @@ This project demonstrates an end-to-end SQL data warehousing workflow:
 - SQL
 - psql `\copy` for CSV loading
 - Star schema data modeling
+- Power BI for data visualization and dashboarding
 
 ## Dataset
 
@@ -52,6 +54,13 @@ ecommerce-dw/
 |   `-- queries/
 |       |-- 01_monthly_revenue_yoy.sql
 |       `-- 02_top_sellers_per_state.sql
+|-- powerbi/
+|   `-- Ecommerce_Sales_Dashboard.pbix  # Interactive Power BI dashboard
+|-- diagrams/
+|   |-- etl-flow.png
+|   `-- star-schema.png
+|-- docs/
+|   `-- dashboard_screenshot.png        # Power BI dashboard screenshot
 `-- README.md
 ```
 
@@ -117,6 +126,50 @@ Included analyses:
 
 - Monthly delivered-order revenue with year-over-year growth
 - Top 3 sellers per Brazilian state by delivered-order revenue
+
+## Power BI Dashboard
+
+A comprehensive Power BI dashboard (`Ecommerce_Sales_Dashboard.pbix`) is included in the `powerbi/` folder for interactive data visualization and analysis.
+
+![Power BI Dashboard](docs/dashboard_screenshot.png)
+
+### Opening the Dashboard
+
+1. Download and install [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/)
+2. Open the `powerbi/Ecommerce_Sales_Dashboard.pbix` file
+3. When prompted, update the data source connection to point to your local PostgreSQL database
+4. Refresh the data to load the latest warehouse tables
+
+### Dashboard Features
+
+The dashboard provides interactive visualizations including:
+
+- **Revenue Analytics**: Monthly and yearly revenue trends with growth indicators
+- **Sales Performance**: Top-performing sellers and product categories
+- **Customer Insights**: Customer distribution by state, order count, and average order value
+- **Payment Analysis**: Payment method distribution and installment patterns
+- **Order Status Tracking**: Order fulfillment metrics and delivery performance
+- **Geographic Analysis**: Sales performance mapped by Brazilian states with geo-visualization
+
+### Dashboard Components
+
+The dashboard connects to the warehouse tables:
+
+- `warehouse.fact_order_items` (fact table)
+- `warehouse.dim_customer`
+- `warehouse.dim_seller`
+- `warehouse.dim_product`
+- `warehouse.dim_date`
+- `warehouse.dim_order_status`
+- `warehouse.dim_payment_type`
+
+### Prerequisites for Dashboard
+
+Before using the dashboard, ensure:
+
+- PostgreSQL database is populated with the transformed warehouse data
+- Power BI Desktop is installed
+- Network connectivity to the PostgreSQL database (or use local connection if running on same machine)
 
 ## Data Engineering Concepts Used
 
